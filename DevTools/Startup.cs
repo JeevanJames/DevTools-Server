@@ -38,6 +38,8 @@ namespace DevTools
             };
             config.Formatters.Add(jsonFormatter);
 
+            SwaggerConfig.Register(config);
+
             config.EnsureInitialized();
             return server;
         }
