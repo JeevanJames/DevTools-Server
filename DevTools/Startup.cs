@@ -1,8 +1,12 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Formatting;
+using System.Web.Http;
 
 using DevTools;
 
 using Microsoft.Owin;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 using Owin;
 
@@ -25,6 +29,16 @@ namespace DevTools
 
             config.MapHttpAttributeRoutes();
 
+            config.Formatters.Clear();
+            var jsonFormatter = new JsonMediaTypeFormatter {
+                SerializerSettings = {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore
+                }
+            };
+            config.Formatters.Add(jsonFormatter);
+
+            config.EnsureInitialized();
             return server;
         }
     }
