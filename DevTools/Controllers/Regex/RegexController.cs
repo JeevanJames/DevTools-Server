@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace DevTools.Controllers.Regex
 {
@@ -11,6 +10,7 @@ namespace DevTools.Controllers.Regex
     {
         [HttpGet]
         [Route("test")]
+        [ResponseType(typeof(RegexResponse))]
         public IHttpActionResult Test([FromUri] RegexRequest request)
         {
             if (!ModelState.IsValid)
@@ -25,21 +25,5 @@ namespace DevTools.Controllers.Regex
             };
             return Ok(response);
         }
-    }
-
-    public sealed class RegexRequest
-    {
-        [Required]
-        public string Pattern { get; set; }
-
-        [Required]
-        public string Text { get; set; }
-    }
-
-    public sealed class RegexResponse
-    {
-        public bool Match { get; set; }
-
-        public List<string> Groups { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Web.Http;
 using DevTools;
 
 using Microsoft.Owin;
+using Microsoft.Owin.Diagnostics;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -20,9 +21,11 @@ namespace DevTools
         {
             HttpServer server = CreateWebApiConfig();
             app.UseWebApi(server);
+
+            app.UseWelcomePage();
         }
 
-        private HttpServer CreateWebApiConfig()
+        private static HttpServer CreateWebApiConfig()
         {
             var config = new HttpConfiguration();
             var server = new HttpServer(config);
