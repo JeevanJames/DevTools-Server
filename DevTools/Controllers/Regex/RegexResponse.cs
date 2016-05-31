@@ -6,6 +6,6 @@ namespace DevTools.Controllers.Regex
     {
         public bool Match { get; set; }
 
-        public List<string> Groups { get; set; }
+        public IReadOnlyList<IReadOnlyList<string>> Groups { get; set; }
     }
 }

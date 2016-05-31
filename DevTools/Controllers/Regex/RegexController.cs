@@ -16,12 +16,14 @@ namespace DevTools.Controllers.Regex
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var regex = new System.Text.RegularExpressions.Regex(request.Pattern);
-            Match match = regex.Match(request.Text);
-            if (!match.Success)
+            MatchCollection matches = regex.Matches(request.Text);
+            if (matches.Count == 0)
                 return Ok(new RegexResponse { Match = false });
             var response = new RegexResponse {
                 Match = true,
-                Groups = match.Groups.Cast<Group>().Select(g => g.Value).ToList()
+                Groups = matches.Cast<Match>()
+                    .Select(m => m.Groups.Cast<Group>().Select(g => g.Value).ToList())
+                    .ToList()
             };
             return Ok(response);
         }
