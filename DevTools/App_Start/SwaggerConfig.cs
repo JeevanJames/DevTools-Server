@@ -7,11 +7,11 @@ using Swashbuckle.Application;
 
 namespace DevTools
 {
-    public class SwaggerConfig
+    public static class SwaggerConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            var thisAssembly = typeof(SwaggerConfig).Assembly;
+            //var thisAssembly = typeof(SwaggerConfig).Assembly;
 
             config 
                 .EnableSwagger(c =>

@@ -1,10 +1,10 @@
-﻿using System.Net.Http.Formatting;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 using DevTools;
 
 using Microsoft.Owin;
-using Microsoft.Owin.Diagnostics;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -17,6 +17,7 @@ namespace DevTools
 {
     public sealed class Startup
     {
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public void Configuration(IAppBuilder app)
         {
             HttpServer server = CreateWebApiConfig();
