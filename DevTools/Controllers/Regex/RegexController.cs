@@ -18,10 +18,10 @@ namespace DevTools.Controllers.Regex
             var regex = new System.Text.RegularExpressions.Regex(request.Pattern);
             MatchCollection matches = regex.Matches(request.Text);
             if (matches.Count == 0)
-                return Ok(new RegexResponse { Match = false });
+                return Ok(new RegexResponse { IsMatch = false });
             var response = new RegexResponse {
-                Match = true,
-                Groups = matches.Cast<Match>()
+                IsMatch = true,
+                Matches = matches.Cast<Match>()
                     .Select(m => m.Groups.Cast<Group>().Select(g => g.Value).ToList())
                     .ToList()
             };

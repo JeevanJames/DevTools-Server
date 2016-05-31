@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,11 +38,12 @@ namespace DevTools.Tests
 
             Assert.Equal(HttpStatusCode.OK, message.StatusCode);
 
-            var content = await message.Content.ReadAsAsync<RegexResponse>(cts.Token);
-            Assert.True(content.Match);
-            Assert.Equal(expectedGroups.Length, content.Groups.Count);
-            //for (int i = 0; i < expectedGroups.Length; i++)
-            //    Assert.Equal(expectedGroups[i], content.Groups);
+            var result = await message.Content.ReadAsAsync<RegexResponse>(cts.Token);
+            Assert.True(result.IsMatch);
+            IReadOnlyList<string> firstMatch = result.Matches.First();
+            Assert.Equal(expectedGroups.Length, firstMatch.Count);
+            for (int i = 0; i < expectedGroups.Length; i++)
+                Assert.Equal(expectedGroups[i], firstMatch[i]);
         }
     }
 }

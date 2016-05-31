@@ -4,8 +4,8 @@ namespace DevTools.Controllers.Regex
 {
     public sealed class RegexResponse
     {
-        public bool Match { get; set; }
+        public bool IsMatch { get; set; }
 
-        public IReadOnlyList<IReadOnlyList<string>> Groups { get; set; }
+        public IReadOnlyList<IReadOnlyList<string>> Matches { get; set; }
     }
 }
